@@ -1,55 +1,38 @@
 import React from "react";
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import ImagePopup from "./ImagePopup";
-import PopupWithForm from "./PopupWithForm";
+import Header from "./Header.js";
+import Main from "./Main.js";
+import Footer from "./Footer.js";
+import ImagePopup from "./ImagePopup.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen ] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({})
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
 
-
-  // function handleEditAvatarClick(){
-  //   setIsEditAvatarPopupOpen(true)
-  // }
-
-  // function handleEditProfileClick(){
-  //   setIsEditProfilePopupOpen(true)
-  // }
-
-  // function handleAddPlaceClick(){
-  //   setIsAddPlacePopupOpen(true)
-  // }
-  // function handleCardClick(card){
-  //   setSelectedCard(card)
-  // }
-
-  function closeAllPopups(){
-    setIsEditAvatarPopupOpen(false)
-    setIsEditProfilePopupOpen(false)
-    setIsAddPlacePopupOpen(false)
-    setSelectedCard({})
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard({});
   }
 
   return (
     <div className="App">
-      <div class="page">
+      <div className="page">
         <Header />
-        <Main 
-        onEditAvatar={setIsEditAvatarPopupOpen}
-        onEditProfile={setIsEditProfilePopupOpen}
-        onAddPlace={setIsAddPlacePopupOpen}
-        onCardClick={setSelectedCard}
+        <Main
+          onEditAvatar={setIsEditAvatarPopupOpen}
+          onEditProfile={setIsEditProfilePopupOpen}
+          onAddPlace={setIsAddPlacePopupOpen}
+          onCardClick={setSelectedCard}
         />
         <Footer />
 
-        <ImagePopup
-          card={selectedCard}
-          onClose={closeAllPopups}
-        />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
         <PopupWithForm
           name="popup_profile"
@@ -65,8 +48,8 @@ function App() {
                 className="popup__input popup__input_type_name"
                 name="name"
                 placeholder="Имя"
-                minlength="2"
-                maxlength="40"
+                minLength="2"
+                maxLength="40"
                 required
               />
 
@@ -78,8 +61,8 @@ function App() {
                 className="popup__input popup__input_type_description"
                 name="about"
                 placeholder="Вид деятельности"
-                minlength="2"
-                maxlength="200"
+                minLength="2"
+                maxLength="200"
                 required
               />
 
@@ -102,8 +85,8 @@ function App() {
                 className="popup__input popup__input_type_place"
                 name="name"
                 placeholder="Название"
-                minlength="2"
-                maxlength="30"
+                minLength="2"
+                maxLength="30"
                 required
               />
 
@@ -148,10 +131,7 @@ function App() {
           name="popup_delete"
           title="Вы уверены?"
           buttonText="Да"
-          
         />
-
-
       </div>
     </div>
   );

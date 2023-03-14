@@ -9,18 +9,30 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   const [cards, setCards] = React.useState([])
 
   React.useEffect(() => {
-      Promise.all([api.getInfoAboutUser(), api.getCardsUser()])
-        .then(([userData, cardsUser]) => {
+      api.getInfoAboutUser() 
+        .then((userData) => {
           setUserName(userData.name);
           setUserDescription(userData.about);
           setUserAvatar(userData.avatar);
-          setCards(cardsUser);
+          
         })
 
         .catch((err) => {
           console.log(`Ошибка ${err}`);
-        });
-    });
+        })
+        api.getCardsUser().then((cardsUser)=> {
+          setCards(cardsUser
+            .map((data)=>({
+            name: data.name,
+            link: data.link,
+            idCard: data._id,
+            likes: data.likes
+          })))
+        })
+        .catch((err) => {
+          console.log(`Ошибка ${err}`);
+        })
+    }, []);
 
   return (
     <div className="content">
@@ -58,8 +70,8 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
       <section className="element">
         {cards.map((card)=>(
           <Card 
-            key={card._id}
             card={card}
+            key={card.idCard}
             link={card.link}
             name={card.name}
             likes={card.likes}
