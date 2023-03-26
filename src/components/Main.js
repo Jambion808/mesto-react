@@ -1,38 +1,40 @@
 import React from "react";
-import api from "../utils/Api.js";
+// import api from "../utils/Api.js";
 import Card from "./Card.js";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState([])
+function Main({cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onLikeClick, onDeleteClick}) {
+  const currentUser = React.useContext(CurrentUserContext);
+  // const [userName, setUserName] = React.useState("");
+  // const [userDescription, setUserDescription] = React.useState("");
+  // const [userAvatar, setUserAvatar] = React.useState("");
+  // const [cards, setCards] = React.useState([]);
 
-  React.useEffect(() => {
-      api.getInfoAboutUser() 
-        .then((userData) => {
-          setUserName(userData.name);
-          setUserDescription(userData.about);
-          setUserAvatar(userData.avatar);
+  // React.useEffect(() => {
+  //     api.getInfoAboutUser() 
+  //       .then((userData) => {
+  //         setUserName(userData.name);
+  //         setUserDescription(userData.about);
+  //         setUserAvatar(userData.avatar);
           
-        })
+  //       })
 
-        .catch((err) => {
-          console.log(`Ошибка ${err}`);
-        })
-        api.getCardsUser().then((cardsUser)=> {
-          setCards(cardsUser
-            .map((data)=>({
-            name: data.name,
-            link: data.link,
-            idCard: data._id,
-            likes: data.likes
-          })))
-        })
-        .catch((err) => {
-          console.log(`Ошибка ${err}`);
-        })
-    }, []);
+  //       .catch((err) => {
+  //         console.log(`Ошибка ${err}`);
+  //       })
+  //       api.getCardsUser().then((cardsUser)=> {
+  //         setCards(cardsUser
+  //           .map((data)=>({
+  //           name: data.name,
+  //           link: data.link,
+  //           idCard: data._id,
+  //           likes: data.likes
+  //         })))
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Ошибка ${err}`);
+  //       })
+  //   }, []);
 
   return (
     <div className="content">
@@ -44,7 +46,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             onClick={onEditAvatar}
           >
             <img
-              src={userAvatar}
+              src={currentUser.avatar}
               alt="Аватар профиля"
               className="profile__avatar"
             />
@@ -52,13 +54,13 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         </div>
 
         <div className="profile__info">
-          <h1 className="profile__name">{userName}</h1>
+          <h1 className="profile__name">{currentUser.name}</h1>
           <button
             className="profile__edit"
             type="button"
             onClick={onEditProfile}
           ></button>
-          <p className="profile__description">{userDescription}</p>
+          <p className="profile__description">{currentUser.about}</p>
         </div>
         <button
           className="profile__add-content"
@@ -71,11 +73,13 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         {cards.map((card)=>(
           <Card 
             card={card}
-            key={card.idCard}
+            key={card._id}
             link={card.link}
             name={card.name}
             likes={card.likes}
             onCardClick={onCardClick}
+            onDeleteClick={onDeleteClick}
+            onLikeClick={onLikeClick}
             />
         ))}
       </section>

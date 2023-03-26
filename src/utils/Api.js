@@ -27,20 +27,20 @@ class Api {
     }).then(processResponse);
   }
 
-  setAddUserCard(name, link) {
+  setAddUserCard(item) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name: item.name,
+        link: item.link,
       }),
     }).then(processResponse);
   }
 
-  setLikes(id) {
+  setLikes(id, isLiked) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`,{
-        method: "PUT",
+        method: isLiked ? "PUT" :"DELETE",
         headers: this._headers,
       }
     ).then(processResponse);
