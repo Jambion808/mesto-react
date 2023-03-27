@@ -3,41 +3,19 @@ import React from "react";
 import Card from "./Card.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-function Main({cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onLikeClick, onDeleteClick}) {
+function Main({
+  cards,
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  onLikeClick,
+  onDeleteClick,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
-  // const [userName, setUserName] = React.useState("");
-  // const [userDescription, setUserDescription] = React.useState("");
-  // const [userAvatar, setUserAvatar] = React.useState("");
-  // const [cards, setCards] = React.useState([]);
-
-  // React.useEffect(() => {
-  //     api.getInfoAboutUser() 
-  //       .then((userData) => {
-  //         setUserName(userData.name);
-  //         setUserDescription(userData.about);
-  //         setUserAvatar(userData.avatar);
-          
-  //       })
-
-  //       .catch((err) => {
-  //         console.log(`Ошибка ${err}`);
-  //       })
-  //       api.getCardsUser().then((cardsUser)=> {
-  //         setCards(cardsUser
-  //           .map((data)=>({
-  //           name: data.name,
-  //           link: data.link,
-  //           idCard: data._id,
-  //           likes: data.likes
-  //         })))
-  //       })
-  //       .catch((err) => {
-  //         console.log(`Ошибка ${err}`);
-  //       })
-  //   }, []);
 
   return (
-    <div className="content">
+    <main className="content">
       <section className="profile">
         <div className="profile__avatar-container">
           <button
@@ -70,8 +48,8 @@ function Main({cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onLi
       </section>
 
       <section className="element">
-        {cards.map((card)=>(
-          <Card 
+        {cards.map((card) => (
+          <Card
             card={card}
             key={card._id}
             link={card.link}
@@ -80,10 +58,10 @@ function Main({cards, onEditAvatar, onEditProfile, onAddPlace, onCardClick, onLi
             onCardClick={onCardClick}
             onDeleteClick={onDeleteClick}
             onLikeClick={onLikeClick}
-            />
+          />
         ))}
       </section>
-    </div>
+    </main>
   );
 }
 

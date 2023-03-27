@@ -28,7 +28,7 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка ${err}`);
       });
-      
+
     api
       .getCardsUser()
       .then((cardsUser) => {

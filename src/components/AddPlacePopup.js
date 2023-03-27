@@ -35,37 +35,35 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <>
-        <input
-          type="text"
-          id="place-input"
-          className="popup__input popup__input_type_place"
-          name="name"
-          placeholder="Название"
-          minLength="2"
-          maxLength="30"
-          required
-          value={place}
-          onChange={handleOnChangePlace}
-        />
+      <input
+        type="text"
+        id="place-input"
+        className="popup__input popup__input_type_place"
+        name="name"
+        placeholder="Название"
+        minLength="2"
+        maxLength="30"
+        required
+        value={place}
+        onChange={handleOnChangePlace}
+      />
 
-        <span className="popup__input-error place-input-error"></span>
+      <span className="popup__input-error place-input-error"></span>
 
-        <input
-          type="url"
-          id="url-input"
-          className="popup__input popup__input_type_url"
-          name="link"
-          placeholder="Ссылка на картинку"
-          required
-          minLength="2"
-          maxLength="200"
-          value={link}
-          onChange={handleOnChangeLink}
-        />
+      <input
+        type="url"
+        id="url-input"
+        className="popup__input popup__input_type_url"
+        name="link"
+        placeholder="Ссылка на картинку"
+        required
+        minLength="2"
+        maxLength="200"
+        value={link}
+        onChange={handleOnChangeLink}
+      />
 
-        <span className="popup__input-error url-input-error"></span>
-      </>
+      <span className="popup__input-error url-input-error"></span>
     </PopupWithForm>
   );
 }
