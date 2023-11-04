@@ -1,4 +1,4 @@
-https://jambion808.github.io/mesto-react/
+## [Проект: Научиться учиться](https://jambion808.github.io/mesto-react/)
 
 # Getting Started with Create React App
 
